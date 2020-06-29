@@ -1,0 +1,9 @@
+{
+  "engine": "cocos-creator-js",
+  "packages": "packages",
+  "name": "ball",
+  "uuid": "12084743-bb11-46f1-8cd5-e5c428d47743",
+  "version": "2.3.4",
+  "id": "caab131b-0e87-4845-85ff-1197c4e35fa6",
+  "isNew": false
+}
