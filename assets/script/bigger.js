@@ -39,16 +39,15 @@ cc.Class({
         },
         userScore:0,
         bgAudio:{
-            url:cc.AudioClip,
             default:null,
+            type:cc.AudioClip,
         },
         jumpAudio:{
-            url:cc.AudioClip,
-            default:null,
+            default: null,
+            type: cc.AudioClip
         }
     },
     onLoad () {
-
         var manager = cc.director.getCollisionManager();
         manager.enabled = true; // 开启碰撞
         if (this.is_debug) {
@@ -60,15 +59,15 @@ cc.Class({
         // 播放背景音乐
         cc.audioEngine.setEffectsVolume(.2);
         cc.audioEngine.playMusic(this.bgAudio,true);
-
         this.schedule(()=>{
-            console.log('开始倒计时',this.timerNumber);
             this.timerNumber -= 1;
             this.timerLabel.string = `倒计时：${this.timerNumber}`;
             if(this.timerNumber<=0){
                 cc.director.loadScene('end');
             }
         },1)
+    },
+    onDestroy(){
     },
     start () {
 

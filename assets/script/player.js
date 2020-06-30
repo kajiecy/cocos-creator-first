@@ -37,6 +37,7 @@ cc.Class({
     // 碰撞开始
     onCollisionEnter: function (other, self) {
         console.log("other.name = ", other.node.name, other.node.group, other.node.groupIndex);
+        cc.audioEngine.pauseMusic();
         cc.director.loadScene('end');
     },
     start () {
