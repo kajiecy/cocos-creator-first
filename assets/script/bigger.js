@@ -27,6 +27,25 @@ cc.Class({
         _diciDistance:101,
         diciMaxCount:7,
         is_debug: true,
+
+        timerNumber:5,
+        timerLabel:{
+            type:cc.Label,
+            default:null,
+        },
+        scoreLabel:{
+            type:cc.Label,
+            default:null,
+        },
+        userScore:0,
+        bgAudio:{
+            url:cc.AudioClip,
+            default:null,
+        },
+        jumpAudio:{
+            url:cc.AudioClip,
+            default:null,
+        }
     },
     onLoad () {
 
@@ -38,6 +57,18 @@ cc.Class({
         this.player.x = -this.node.width/2+85;
         this.bindTouch();
         this.createDiCi();
+        // 播放背景音乐
+        cc.audioEngine.setEffectsVolume(.2);
+        cc.audioEngine.playMusic(this.bgAudio,true);
+
+        this.schedule(()=>{
+            console.log('开始倒计时',this.timerNumber);
+            this.timerNumber -= 1;
+            this.timerLabel.string = `倒计时：${this.timerNumber}`;
+            if(this.timerNumber<=0){
+                cc.director.loadScene('end');
+            }
+        },1)
     },
     start () {
 
@@ -61,9 +92,7 @@ cc.Class({
                     });
                     let playerAction = cc.sequence(endFunc,moveL);
                     this.player.runAction(playerAction);
-
                 }
-
             }else {
                 if(this._playerDirection==='right'){
                     let mov1 = cc.moveBy(0.1,-30,0);
@@ -82,6 +111,11 @@ cc.Class({
                 }
             }
             this.createDICIAtScreamOut();
+            this.userScore ++;
+            this.scoreLabel.string = `Score:${this.userScore}`;
+            cc.sys.localStorage.setItem('userScore',this.userScore);
+            cc.audioEngine.playEffect(this.jumpAudio,false);
+
         },this)
     },
     createDiCi(){

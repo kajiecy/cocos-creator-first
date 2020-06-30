@@ -24,17 +24,25 @@ cc.Class({
         //         this._bar = value;
         //     }
         // },
+        SumScore:{
+            type:cc.Label,
+            default:null,
+        }
+
     },
 
     // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {},
+    onLoad () {
+        let sumScore = cc.sys.localStorage.getItem('userScore')|0;
+        this.SumScore.string = `最终得分：${sumScore}`;
+    },
 
     start () {
 
     },
     clickEndButton(){
-        cc.director.loadScene('game');
+        cc.director.loadScene('start');
     }
     // update (dt) {},
 });
